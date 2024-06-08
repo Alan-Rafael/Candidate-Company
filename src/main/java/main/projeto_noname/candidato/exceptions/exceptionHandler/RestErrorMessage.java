@@ -1,4 +1,4 @@
-package main.projeto_noname.candidato.exceptions;
+package main.projeto_noname.candidato.exceptions.exceptionHandler;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
