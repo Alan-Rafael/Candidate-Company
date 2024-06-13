@@ -2,12 +2,17 @@ package main.projeto_noname.candidato.service;
 
 
 import main.projeto_noname.candidato.Candidate;
+import main.projeto_noname.candidato.dto.CandidateResponseDto;
 import main.projeto_noname.candidato.exceptions.exceptionHandler.CandidateJaExiste;
+import main.projeto_noname.candidato.exceptions.exceptionHandler.CandidateNotFoundException;
 import main.projeto_noname.candidato.repository.CandidateRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CadidateService {
@@ -30,6 +35,19 @@ public class CadidateService {
         candidate.setPassword(password);
 
         return ResponseEntity.status(HttpStatus.OK).body(candidateRepository.save(candidate));
+    }
 
+    public CandidateResponseDto getCandidate (UUID idCandidate){
+        var  candidate = this.candidateRepository.findById(idCandidate)
+                .orElseThrow(()->{
+                    throw new CandidateNotFoundException();
+                });
+        var candidateDto = CandidateResponseDto.builder()
+                .id(candidate.getId())
+                .name(candidate.getName())
+                .email(candidate.getEmail())
+                .username(candidate.getUsername())
+                .build();
+        return candidateDto;
     }
 }
