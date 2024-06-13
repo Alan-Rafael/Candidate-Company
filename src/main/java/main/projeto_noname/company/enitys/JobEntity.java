@@ -1,7 +1,10 @@
 package main.projeto_noname.company.enitys;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -9,6 +12,9 @@ import java.util.UUID;
 
 @Data
 @Entity(name = "job")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class JobEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -26,4 +32,6 @@ public class JobEntity {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+
 }
