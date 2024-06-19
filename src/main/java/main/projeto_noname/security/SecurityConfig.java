@@ -30,7 +30,6 @@ public class SecurityConfig {
                })
                .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);
 
-       ;
        return http.build();
     }
 
